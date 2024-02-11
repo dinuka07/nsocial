@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {useForm} from "react-hook-form";
 import { TbSocial} from "react-icons/tb";
-import TextInput from '../components/TextInput';
+import {TextInput} from "../components";
 import { useDispatch } from "react-redux";
 import { CustomButton, Loading } from "../components";
 
@@ -86,11 +86,25 @@ const Login = () => {
         )
        }
        {
-        isSubmitting ? <Loading/> : <CustomButton/>
+        isSubmitting ? <Loading/> : <CustomButton
+        type='submit'
+        containerStyles={`inline-flex justify-center rounded-md 
+        bg-blue px-8 py-3 text-sm font-medium text-white outline-none`}
+        title='Login'
+        />
        }
        
        
        </form>
+       <p className='text-ascent-2 text-sm text-center'>
+        Don't have an account?{""}
+        <Link
+        to='/register'
+        className=""
+        >
+        </Link>
+
+       </p>
        </div>
        
        
