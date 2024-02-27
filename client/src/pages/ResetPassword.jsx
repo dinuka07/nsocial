@@ -1,9 +1,15 @@
-import React from 'react'
+import React , { useState } from "react";
 
 const ResetPassword = () => {
-  return (
-    <div>ResetPassword</div>
-  )
-}
+  const [errMsg, setErrMsg] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-export default ResetPassword
+  const {
+    register,
+  } = useState({ mode: "onChange", });
+  return 
+    <div>ResetPassword</div>;
+  
+};
+
+export default ResetPassword;
