@@ -9,7 +9,9 @@ import { CustomButton, Loading } from "../components";
 
 const Register = () => {
   const {
-    register, handleSubmit, formState: {errors},
+    register, handleSubmit,
+    getValues,
+     formState: {errors},
   } = useForm({
     mode: "onChange" ,
   });
@@ -85,18 +87,20 @@ const Register = () => {
             required: "Email address is required"
           })
         }
-        styles='w-full rounded-full'
-        labelStyle='ml-2'
+        styles='w-full'
+        
         error={errors.email ? errors.email.message : ""}
         
         />
+
+        <div className='w-full flex flex-col lg:flex-row gap-1 md:gap-2'>
 
         <TextInput 
         name='password'
         label='Password'
         placeholder='Password'
         type='password'
-        styles='w-full rounded-full'
+        styles='w-full'
         labelStyle='ml-2'
         register={register("password", {
           required: "Password is required!",
@@ -104,10 +108,30 @@ const Register = () => {
         error={errors.password ? errors.password.message : ""}
         />
 
-       <Link
-       to='/reset-password'
-       className='text-sm text-right text-blue font-semibold'
-       >Forgot Password ?</Link>
+<TextInput 
+        
+        label='Confirm Password'
+        placeholder='Password'
+        type='password'
+        styles='w-full'
+        register={register("cPassword", {
+          validate: (value) => {
+            const { password } = getValues();
+
+            if (password != value) {
+              return "password do not match"
+            }
+          },
+        } )}
+        error={errors.cPassword && errors.cPassword.type === "validate" 
+        ? errors.cPassword?.message
+        :""
+      
+      }
+        />
+        </div>
+
+       
        {
         errMsg?.message && (
           <span
@@ -125,19 +149,19 @@ const Register = () => {
         type='submit'
         containerStyles={`inline-flex justify-center rounded-md 
         bg-blue px-8 py-3 text-sm font-medium text-white outline-none`}
-        title='Login'
+        title='Create Account'
         />
        }
        
        
        </form>
        <p className='text-ascent-2 text-sm text-center'>
-        Don't have an account?
+        Already has an account?{" "}
         <Link
-        to='/register'
+        to='/login'
         className='text-[#065ad8] font-semibold ml-2 cursor-pointer'
         >
-          Create Account
+          Login
         </Link>
 
        </p>
